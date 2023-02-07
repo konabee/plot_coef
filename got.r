@@ -11,7 +11,7 @@ data<-read.csv('path/clean_got.csv')
 ## But if you really want to know who got decapitated on GoT...
 data %>% mutate(x=ifelse(grepl('^decapitat',dth_description,ignore.case=T)==T,1,0)) %>% filter(x==1)
 
-## Steps: 1. create survival object 2. run regressions 3. extract coefficients and lower/upper estimates 4. plot
+## Steps: 1. create the survival object 2. run regressions 3. extract coefficients and lower/upper estimates 4. plot
 
 ## Create survival object 
 eha<-data %>% 
@@ -20,7 +20,7 @@ eha<-data %>%
          Survobj=Surv(dur,event))
 fit<-survfit(Survobj~sex, data=eha)
 
-## KM curves tell us that men are dying at a higher rate in GoT 
+## KM curves tell us that men die at a higher rate in GoT 
 ggsurvplot(fit,conf.int=T,xlab='Running time in hours',xlim=c(0,60),break.time.by=5)
 
 ## Run Cox proportional hazards models
@@ -28,20 +28,22 @@ c1<-coxph(Surv(dur,event)~sex,data=eha)
 c2<-coxph(Surv(dur,event)~sex+social_status,data=eha)
 c3<-coxph(Surv(dur,event)~sex+social_status+allegiance_switched,data=eha)
 c4<-coxph(Surv(dur,event)~sex+social_status+allegiance_switched+allegiance_last,data=eha)
+
+## Let's have a look at the results from model c4
 summary(c4)
 
-## There are many ways to plot these
+## There are many ways to plot these results
 ## Straight out of the box option--> ggforest 
 ## This is what the authors used in the GoT paper 
 ## ggforest gives you the result in hazard ratio, and already on a log scale! 
 ## but not a lot of add on options. 
 ## ONLY WORKS FOR CLASS COXPH!
-## You can try to tweak the function using trace(survminer::ggforest, edit = T) 
+## You can try to tweak the function using trace(survminer::ggforest, edit = T) but perhaps that's not what you want to do with your time 
 ggforest(c4,
          main='CoxPH hazard ratio of GoT deaths',
          fontsize=0.8,data=eha)
 
-## But maybe we want to show coefficients of multiple models together
+## Maybe we want to show coefficients of several models together
 ## There are many options in using packages to plot coefficients 
 ## These are just some quick stabs, check out their documentations and play around with them 
 library(dotwhisker)
