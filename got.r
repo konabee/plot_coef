@@ -5,7 +5,7 @@ library(survminer)
 
 ## Read in the data 
 ## Thank you Dr. Lystad for sharing your blood sweat and tears from binge watching seven seasons of Game of Thrones
-data<-read.csv('path/clean_got.csv')
+data<-read.csv('yourpath/clean_got.csv')
 
 ## How do we work with text data? A story for another time ##
 ## But if you really want to know who got decapitated on GoT...
@@ -146,7 +146,7 @@ fig1<-data3 %>%
 ## if you want to save the plot, save it as an object (for example 'fig1') then ggsave fig1
 ## otherwise ggsave saves the last object that you run
 
-ggsave(plot = fig1, width = 10, height = 4, dpi = 300, filename = "C:/Users/ccl26/OneDrive - University of St Andrews/R_coef/got_plot.png")
+ggsave(plot = fig1, width = 10, height = 4, dpi = 300, filename = "yourpath/got_plot.png")
 
 
 
