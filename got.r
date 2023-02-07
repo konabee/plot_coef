@@ -116,7 +116,7 @@ data3<-data2 %>%
                                      'unknown','other')))
 
 ## STATA users, you can start from here 
-## Save your STATA coefficient output in a csv, and then data3<-read.csv('whereever your file is') to use it here 
+## Save your STATA coefficient output in a csv, and then data3<-read.csv('whereever your file is')...
 
 ## Making the plot 
 fig1<-data3 %>% 
