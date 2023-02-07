@@ -115,6 +115,9 @@ data3<-data2 %>%
                                      'Lowborn','Highborn','Male','Female',
                                      'unknown','other')))
 
+## STATA users, you can start from here 
+## Save your STATA coefficient output in a csv, and then data3<-read.csv('whereever your file is') to use it here 
+
 ## Making the plot 
 fig1<-data3 %>% 
   filter(!names %in% c('unknown','other')) %>%
