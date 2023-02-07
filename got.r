@@ -122,7 +122,7 @@ data3<-data2 %>%
 
 ## Making the plot 
 fig1<-data3 %>% 
-  filter(!names %in% c('unknown','other')) %>%
+  filter(!names %in% c('unknown','other')) %>% ## exclude results I don't want to plot 
   ggplot(aes(x=names,y=coef,color=model))+
   geom_pointrange(mapping=aes(ymin=upper, ymax=lower), size=0.8, position=position_dodge(width=.9),alpha=.6)+
   geom_hline(yintercept = 1, color='darkred',linewidth=.8,na.rm=T)+
